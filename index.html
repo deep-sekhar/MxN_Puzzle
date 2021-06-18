@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>puzzle</title>
+    <link rel="stylesheet" href="css/game.css">
+    <link rel="stylesheet" href="css/gameinphone.css" media="screen and (max-width:600px)">
+</head>
+<body>
+    <nav id="bar">
+        <div id="toggle-bar">
+            Dark-mode:
+            <div id="buttonarea">
+                <div id="button">
+                    
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div id="container">
+        <h4 style="text-align: center;">Click the boxes present in the row and column of blank box to arrange them in order. All the best !</h4>
+        <h4>Your All Time Highest Score:
+            <span id="higest">NIL</span>
+        </h4>
+        <div id="boxarea">
+
+        </div>
+        <hr style="background-color: white; height: 4px; " id="hrline">
+        <div id="monitor" class="glass2">
+            <div id="monitor1" class="glass3">
+                <span>Select matrix here:</span>
+                <select name="n" id="options1" onchange="setup()">
+                    <option value="3" class="nval"> 3 </option>
+                    <option value="4" class="nval"selected> 4 </option>
+                    <option value="5" class="nval" > 5 </option>
+                    <option value="6" class="nval"> 6 </option>
+                </select>
+                <span>x</span>
+                <select name="n" id="options2" onchange="setup()">
+                    <option value="3" class="nval"> 3 </option>
+                    <option value="4" class="nval" selected> 4 </option>
+                    <option value="5" class="nval" > 5 </option>
+                    <option value="6" class="nval"> 6 </option>
+                </select>
+            </div>
+            <div id="monitor2" class="glass3">
+                <span>Time:</span>
+                <span id="timer">0</span>
+            </div>
+            <div id="monitor3" class="glass3">
+                <span>Moves:</span>
+                <span id="moves">0</span>
+            </div>
+            <div id="monitor4" class="glass3" style="color: rgb(2, 140, 214); background-color: white;">
+                Reset
+            </div>
+        </div>
+    </div>
+    <script src="js/app.js"></script>
+</body>
+</html>
