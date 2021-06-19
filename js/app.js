@@ -430,9 +430,9 @@ function darkmodeact2()
         tbutton2.style.transform=`translateX(26px)`;
         alert(`CHALLENGE MODE:
         
-In this mode random boxes are blocked for 5secs
-Like box 10 is blocked for first 6sec
-Then box 12 is blocked for next 6 sec.`);
+In this mode random boxes are blocked for 6secs
+Like box 10 may be blocked for first 6secs
+Then box 12 may be blocked for next 6 secs.`);
     CELLBLOCKfunc();
     cellblock = setInterval(() => {
     CELLBLOCKfunc();
