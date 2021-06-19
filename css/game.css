@@ -22,41 +22,33 @@ html{
 body{
     font-size: 1.1rem;
     color: white;
+    z-index: -1;
+    background-color: rgb(0, 148, 228);
+    transition: all 1.2s ease 0s;
+    height: 110%;
 }
 
-body::after{
-    /* bgm   */
-    content: "";
-    background:rgb(0, 148, 228);
-
-    /* position  */
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 150%;
-    width: 160%;
-
-    /* below content  */
-    z-index: -2;
-}
 
 body::before{
      /* bgm   */
     content: "";
-    background:#4ab7f7;
+    /* background:#4ab7f7; */
+    /* background:rgb(74, 183, 247); */
+    /* background:rgb(79, 82, 83); */
+    background:rgb(255, 255, 255,0.16);
 
     /* position  */
     position: absolute;
     top: 0;
     left: 0;
-    height: 100%;
-    width: 160%;
+    height: 110%;
+    width: 150%;
 
      /* below content  */
-    z-index: -1;
+    z-index: -2;
 
     clip-path: polygon(100% 0%, 0% 0% , 0% 65%, 1% 64.95%, 2% 64.8%, 3% 64.6%, 4% 64.3%, 5% 63.9%, 6% 63.45%, 7% 62.9%, 8% 62.25%, 9% 61.55%, 10% 60.8%, 11% 59.95%, 12% 59.05%, 13% 58.1%, 14% 57.1%, 15% 56.05%, 16% 55%, 17% 53.9%, 18% 52.8%, 19% 51.65%, 20% 50.5%, 21% 49.35%, 22% 48.2%, 23% 47.05%, 24% 45.9%, 25% 44.8%, 26% 43.75%, 27% 42.75%, 28% 41.75%, 29% 40.8%, 30% 39.9%, 31% 39.1%, 32% 38.35%, 33% 37.65%, 34% 37.05%, 35% 36.5%, 36% 36.05%, 37% 35.65%, 38% 35.35%, 39% 35.15%, 40% 35.05%, 41% 35%, 42% 35.05%, 43% 35.2%, 44% 35.45%, 45% 35.75%, 46% 36.15%, 47% 36.65%, 48% 37.2%, 49% 37.85%, 50% 38.55%, 51% 39.35%, 52% 40.2%, 53% 41.1%, 54% 42.05%, 55% 43.05%, 56% 44.1%, 57% 45.15%, 58% 46.3%, 59% 47.4%, 60% 48.55%, 61% 49.7%, 62% 50.85%, 63% 52%, 64% 53.15%, 65% 54.25%, 66% 55.35%, 67% 56.4%, 68% 57.45%, 69% 58.4%, 70% 59.35%, 71% 60.2%, 72% 61.05%, 73% 61.8%, 74% 62.45%, 75% 63.05%, 76% 63.6%, 77% 64.05%, 78% 64.4%, 79% 64.7%, 80% 64.85%, 81% 65%, 82% 65%, 83% 64.9%, 84% 64.75%, 85% 64.5%, 86% 64.2%, 87% 63.75%, 88% 63.25%, 89% 62.7%, 90% 62.05%, 91% 61.3%, 92% 60.5%, 93% 59.65%, 94% 58.75%, 95% 57.8%, 96% 56.8%, 97% 55.75%, 98% 54.65%, 99% 53.55%, 100% 52.4%);;
-
+    transition: all 1.2s ease 0s;
 }
 
 /* class effects  */
@@ -73,6 +65,7 @@ body::before{
 }
 .glass2{
     border-radius: 12px;
+    /* box-shadow: 15px 15px 20px 1px rgba(226, 219, 219, 0.6),-15px -15px 20px 1px rgba(226, 219, 219, 0.6); */
     box-shadow: 15px 15px 20px 1px rgb(54, 106, 251,0.8),-15px -15px 20px 1px rgb(54, 106, 251,0.8);
     background: rgb(255, 255, 255,0.1);
     border: 0.5px solid white;
@@ -80,6 +73,7 @@ body::before{
     margin: 3px;
     padding: 8px;
     cursor: pointer;
+    transition: all 0.2s ease 0s;
 }
 .glass3{
     border-radius: 12px;
@@ -117,25 +111,45 @@ body::before{
     align-items: center;
     margin-top: 10px;
 }
+#monitor4{
+    transition: all 0.5s ease 0s;
+}
 
 #options1, #options2{
-    background-color: #4ab7f7;
+    background-color: rgb(81, 180, 233);
     color: white;
     margin: 12px;
     border-radius: 18px;
     font-size: 1.2rem;
+    transition: all 0.9s ease 0s;
 }
 
 /* toggle bar area  */
-#bar{
-    height: 40px;
-}
+#bar::before{
+    content: "";
+    background-color: rgb(44, 43, 43);
 
+    /* position  */
+    position: absolute;
+    top: 0;
+    left: 0;
+    
+    height: 42px;
+    width: 150%;
+
+     /* below content  */
+    z-index: -2;
+}
+#bar{
+    display: flex;
+    flex-flow: row wrap;
+}
 #toggle-bar{
     display: flex;
     flex-flow: row wrap;
-    justify-content: center;
+    justify-content: left;
     margin-top: 10px;
+    margin-left: 10px;
 }
 #buttonarea
 {
@@ -149,6 +163,7 @@ body::before{
     background-color: white;
     border-radius: 15px;
     border: 1px solid black;
+    transition: all 1.2s ease 0s;
 }
 #button{
     height: 20px;
@@ -156,12 +171,58 @@ body::before{
     background-color: white;
     border: 1px solid black;
     border-radius: 14px;
+    transition: all 1s ease 0s;
+    transform:translateX(0px);
 }
-
+/* instruction area  */
+#howto{
+    transition: all 0.5s ease 0s;
+    margin-bottom: 10px;
+}
+/* logo area  */
+#logo img{
+    height: 20px;
+    margin-top: 13px;
+    margin-left: 25px;
+}
+/* footer area  */
+footer{
+    background-color: black;
+    color: white;
+    font-size: 1.1rem;
+    padding: 10px;
+    margin: 10px;
+    text-align: center;
+}
+.footlogo{
+    display: inline-block;
+    margin-left: 15px;
+}
+.footlogo a{
+    color: white;
+    text-decoration: none;
+}
 
 
  /* =================================================================
  TRASH CODES FOR TESTING PURPOSES */
+
+/* body::after{
+    content: "";
+    background:rgb(0, 148, 228);
+    background:rgb(50, 50, 51);
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 110%;
+    width: 120%;
+
+    
+    z-index: -3;
+
+    transition: all 1.2s ease 0s;
+} */
 
 /* keyframes  */
 /* @keyframes moveright {

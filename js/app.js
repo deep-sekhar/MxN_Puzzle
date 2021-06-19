@@ -2,7 +2,6 @@
 let n1 = document.getElementById("options1").value;
 let n2 = document.getElementById("options2").value;
 let boxarea=document.getElementById("boxarea");
-boxarea.className="glass2";
 let moves =document.getElementById("moves") ;
 let countmoves = 0;
 let hrline = document.getElementById("hrline");
@@ -13,11 +12,36 @@ let clock;
 let reset= document.getElementById("monitor4");
 let tbuttonarea = document.getElementById("buttonarea");
 let tbutton = document.getElementById("button");
+let glass2 = document.getElementsByClassName("glass2");
+let bgm = document.querySelector("body");
+let colorno = 4;
+let colorno2 = 2;
+let matrixtype = n1*n2;
+let highestsc = localStorage.getItem(`highestList${matrixtype}`);
 
-tbuttonarea.addEventListener("click",()=>{
-    console.log("buttton clicked");
+if (highestsc==null) {
+    highestsc=-1;        
+    highest.innerHTML=`NIL`;
+}
+else{
+    let hsec = highestsc%60;
+    let hmin = parseInt(highestsc/60);
+    highest.innerHTML=`${hmin}m ${hsec}s`;
+}
+// let highestscObj;
+// else{
+//     highestscObj=JSON.parse(highestsc);
+// }
 
-})
+howto.addEventListener("click",()=>{
+    alert(`INSTRUCTIONS:
+    1.Click on boxes having the blank box in its row or column
+    2.Doing this  will shift the blank box to that  position
+    3.Like this shift all the boxes to arrange them  in order
+    starting with box numbered 1 on top left
+    
+    Best of luck!`)
+});
 
 function startclock() {
     counttimer = 0;
@@ -32,12 +56,14 @@ startclock();
 
 let derivedbox = document.getElementsByClassName("derivedbox");
 let posx, posy, curx, cury;
+boxarea.className=`glass2`;
 
 setup();
 
 function setup()
 {
-    boxarea.innerHTML="";
+    console.log(colorno2);
+
     n1 = document.getElementById("options1").value;
     n2 = document.getElementById("options2").value;
     hrline.style.width= `calc(${n2}*100px)`;
@@ -49,7 +75,11 @@ function setup()
     //     document.body.style.backgroundColor = "pink";
     //   }
 
-    boxarea.style.cssText=` transition: all 1s ease 0s; width:calc(${n2}*70px); height:calc(${n1}*70px);margin-bottom:12px;font-size: 1.5rem;margin-top:20px; `;
+    boxarea.style.cssText=` transition: all 1s ease 0s; width:calc(${n2}*70px); height:calc(${n1}*70px);margin-bottom:16px;font-size: 1.8rem;margin-top:20px; z-index: 2;`;
+
+    if (colorno2==1) {
+        boxarea.style.boxShadow=`10px 10px 20px 1px rgb(116, 114, 114),-10px -10px 20px 1px rgb(116, 114, 114)`;
+    }
 
     let str ="";
     // console.log(n1);
@@ -67,11 +97,11 @@ function setup()
                 {
                     boxes[i][j]=i*n2+(j+1);
                     // console.log(boxes[i][j]);
-                    str+=`<div style="display:flex; align-items:center; justify-content:center; position:absolute; top:calc(${i}*70px); left:calc(${j}*70px); height:65px; width:65px; " class="glass4 derivedbox" >${boxes[i][j]}</div>`;
+                    str+=`<div style="display:flex; align-items:center; justify-content:center; position:absolute; top:calc(${i}*70px); left:calc(${j}*70px); height:65px; width:65px; transition: all 0.5s ease 0s" class="glass${colorno} derivedbox" >${boxes[i][j]}</div>`;
                 }
                 else
                 {
-                    str+=`<div class="glass4 derivedbox" style="display:flex; align-items:center; justify-content:center; position:absolute; top:calc(${i}*70px); left:calc(${j}*70px); height:65px; width:65px; ">.</div>`;
+                    str+=`<div class="glass${colorno} derivedbox" style="display:flex; align-items:center; justify-content:center; position:absolute; top:calc(${i}*70px); left:calc(${j}*70px); height:65px; width:65px; transition: all 0.5s ease 0s"> </div>`;
                 }
             }
         }
@@ -86,9 +116,22 @@ function setup()
     startclock(); 
     // boxarea.addEventListener("loadeddata",startclock());
 
+    matrixtype = n1*n2;
+    highestsc = localStorage.getItem(`highestList${matrixtype}`);
+
+    if (highestsc==null) {
+        highestsc=-1;        
+        highest.innerHTML=`NIL`;
+    }
+    else{
+        let hsec = highestsc%60;
+        let hmin = parseInt(highestsc/60);
+        highest.innerHTML=`${hmin}m ${hsec}s`;
+    }
+
     Array.from(derivedbox).forEach(element => {
         get_coordinates();
-        console.log("running click");
+        // console.log("running click");
         element.addEventListener('click',function (){
             // console.log("hi");
             get_coordinates();
@@ -110,16 +153,26 @@ function setup()
             if (w==1) 
             {
                 alert('CONGO! NAILED IT. Reset to play again');
-                clearInterval(clock); 
+                clearInterval(clock);
+                let gottime =  counttimer;
+                if (highestsc==-1) 
+                {
+                    highestsc = gottime;
+                }
+                else if(gottime<highestsc)
+                {
+                    highestsc = gottime;
+                }
+                localStorage.setItem(`highestList${matrixtype}`,highestsc);
+                highest.innerHTML=`${highestsc}`;
+                let hsec = highestsc%60;
+                let hmin = parseInt(highestsc/60);
+                highest.innerHTML=`${hmin}m ${hsec}s`;
             }
             });
     });
 }
 
-
-// let posx=n2-1, posy=n1-1, curx, cury;
-// console.log("x--- "+posx+"y---"+posy);
-// let derivedarray = Array.from(derivedbox);
 
 function get_coordinates()
 {
@@ -131,7 +184,7 @@ function get_coordinates()
                 boxes[i][j]=derivedbox[i*n2+(j)].innerText;
                 // console.log("box no is" +boxes[i][j]); 
                 // console.log("box numer is"+i*n2+(j+1));
-                if (boxes[i][j]==".") 
+                if (boxes[i][j].length==0) 
                 {
                     // console.log("got it");
                     posx=j;
@@ -211,7 +264,7 @@ function swap(x1,y1,x2,y2)
 function shuffle() 
 {
     let r1,r2 ;
-    for(let i = 0 ;i<100;i++)
+    for(let i = 0 ;i<1000;i++)
     {
         r1= Math.random()*(n1)+0;
         r2= Math.random()*(n2)+0;
@@ -273,6 +326,50 @@ reset.addEventListener("click",()=>{
 }
 );
 
+tbuttonarea.addEventListener("click",darkmodeact
+);
+tbutton.addEventListener("click",darkmodeact
+);
+
+function darkmodeact()
+{
+    
+    let theCSSprop = window.getComputedStyle(tbuttonarea, null).getPropertyValue("background-color");
+    // console.log("buttton clicked--"+theCSSprop);
+
+    if (theCSSprop==`rgb(255, 255, 255)`) {
+        console.log("hi");
+        tbuttonarea.style.backgroundColor=`rgb(138, 247, 0)`;
+        tbutton.style.transform=`translateX(26px)`;
+        bgm.style.backgroundColor=`rgb(50, 50, 51)`;
+        Array.from(glass2).forEach(element => {
+            element.style.boxShadow=`10px 10px 20px 1px rgb(116, 114, 114),-10px -10px 20px 1px rgb(116, 114, 114)`;
+        });
+        options1.style.backgroundColor=`rgb(50, 50, 51)`;
+        options2.style.backgroundColor=`rgb(50, 50, 51)`;
+        monitor4.style.backgroundColor=`rgb(44, 43, 43)`;
+        monitor4.style.color=`white`;
+        howto.style.backgroundColor=`rgb(44, 43, 43)`;
+        howto.style.color=`white`;
+        colorno2=1;
+    }
+    else
+    {
+        tbuttonarea.style.backgroundColor=`rgb(255, 255, 255)`;
+        tbutton.style.transform=`translateX(0px)`;
+        bgm.style.backgroundColor=`rgb(0, 148, 228)`;
+        Array.from(glass2).forEach(element => {
+            element.style.boxShadow=`15px 15px 20px 1px rgb(54, 106, 251,0.8),-15px -15px 20px 1px rgb(54, 106, 251,0.8)`;
+        });
+        options1.style.backgroundColor=`rgb(81, 180, 233)`;
+        options2.style.backgroundColor=`rgb(81, 180, 233)`;
+        monitor4.style.backgroundColor=`white`;
+        monitor4.style.color=`rgb(2, 140, 214)`;
+        howto.style.backgroundColor=`white`;
+        howto.style.color=`rgb(2, 140, 214)`;
+        colorno2=2;
+    }
+}
 // =================================================================
 // TRASH CODES FOR TESTING PURPOSES
 
