@@ -311,7 +311,7 @@ function swap(x1,y1,x2,y2)
 function shuffle() 
 {
     let r1,r2 ;
-    for(let i = 0 ;i<3;i++)
+    for(let i = 0 ;i<1000;i++)
     {
         r1= Math.random()*(n1)+0;
         r2= Math.random()*(n2)+0;
