@@ -176,11 +176,13 @@ body::before{
     transition: all 1s ease 0s;
     transform:translateX(0px);
 }
+
 /* instruction area  */
 #howto{
     transition: all 0.5s ease 0s;
     margin-bottom: 10px;
 }
+
 /* logo area  */
 #logo img{
     /* display: inline-block; */
@@ -189,6 +191,7 @@ body::before{
     margin-left: 15px;
     margin-right: 15px;
 }
+
 /* footer area  */
 footer{
     background-color: black;

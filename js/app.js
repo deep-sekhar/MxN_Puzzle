@@ -24,6 +24,7 @@ let blockedy = -1;
 let highestsc = localStorage.getItem(`highestList${matrixtype}`);
 hrline.style.width= `150px`;
 
+// get highest store fro local storage  
 if (highestsc==null) {
     highestsc=-1;        
     highest.innerHTML=`NIL`;
@@ -38,6 +39,7 @@ else{
 //     highestscObj=JSON.parse(highestsc);
 // }
 
+// how to play instrtuctions 
 howto.addEventListener("click",()=>{
     alert(`INSTRUCTIONS:
 
@@ -52,6 +54,7 @@ howto.addEventListener("click",()=>{
 let boxareasize = "70px";
 let boxsize = "65px";
 
+// start clock timer 
 function startclock() {
     counttimer = 0;
     clock = setInterval(() => {
@@ -63,10 +66,13 @@ function startclock() {
 }
 startclock(); 
 
+// get the box contents 
 let derivedbox = document.getElementsByClassName("derivedbox");
+// blank poistion and current position 
 let posx, posy, curx, cury;
 boxarea.className=`glass2`; 
 
+// if phone reduce box size 
 function checkphone() {
     let x = window.matchMedia("(max-width: 700px)");
     if (x.matches&&n2>4) { // If media query matches
@@ -82,9 +88,10 @@ function checkphone() {
 }
 
 
-
+// run setup 
 setup();
 
+// setup the boxes 
 function setup()
 {
     console.log(colorno2);
@@ -93,8 +100,10 @@ function setup()
     n2 = document.getElementById("options2").value;
     // hrline.style.width= `calc(${n2}*100px)`;
 
+    // see if it is a phone 
     checkphone();
 
+    // box styles 
     boxarea.style.cssText=` transition: all 0.8s linear 0s; width:calc(${n2}*${boxareasize}); height:calc(${n1}*${boxareasize});margin-bottom:16px;font-size: 1.8rem;margin-top:20px; z-index: 2;`;
 
     if (colorno2==1) {
@@ -102,10 +111,8 @@ function setup()
     }
 
     let str ="";
-    // console.log(n1);
-
-    // window.boxes = new Array(n1);
     boxes = new Array(n1);
+    // setting up the boxes  
 
     for (let i = 0; i < n1; i++) {
         boxes[i]=new Array(n2);
@@ -128,13 +135,15 @@ function setup()
     }
     boxarea.innerHTML=str;
 
+    // shuffle the boxes  
     get_coordinates();
     shuffle();
 
+    // start clock 
     clearInterval(clock);
     startclock(); 
-    // boxarea.addEventListener("loadeddata",startclock());
 
+    // get highest score for that matrix 
     matrixtype = n1*n2;
     highestsc = localStorage.getItem(`highestList${matrixtype}`);
 
@@ -148,6 +157,7 @@ function setup()
         highest.innerHTML=`${hmin}m ${hsec}s`;
     }
 
+    // click events 
     Array.from(derivedbox).forEach(element => {
         get_coordinates();
         // console.log("running click");
@@ -179,6 +189,8 @@ function setup()
             });
     });
 }
+
+// see if won or not 
 function wonORnot() {
     if ((curx==posx||cury==posy)&&((curx!=blockedx)||(cury!=blockedy))) 
     {
@@ -210,6 +222,7 @@ function wonORnot() {
     }
 }
 
+// get coordinats of boxes 
 function get_coordinates()
 {
     derivedbox = document.getElementsByClassName("derivedbox");
@@ -230,6 +243,7 @@ function get_coordinates()
     }
 }
 
+// swap boxes 
 function swap(x1,y1,x2,y2) 
 {
     if (y1==y2) 
@@ -293,10 +307,11 @@ function swap(x1,y1,x2,y2)
     
 }
 
+// shuffle function 
 function shuffle() 
 {
     let r1,r2 ;
-    for(let i = 0 ;i<1000;i++)
+    for(let i = 0 ;i<3;i++)
     {
         r1= Math.random()*(n1)+0;
         r2= Math.random()*(n2)+0;
@@ -311,16 +326,10 @@ function shuffle()
     {
         shuffle();
     }
-    // r1= Math.random()*(n1)+0;
-    // r2= Math.random()*(n2)+0;
-    // let num1 = parseInt(r1);
-    // let num2 = parseInt(r2); 
-    // console.log("--"+num1+"--"+num2);  
-    // console.log("--"+posy+"--"+posx);  
-    // console.log("shuffle called");
     
 }
 
+// see if won or not 
 function won() 
 {
     // console.log("runnig won");
@@ -347,7 +356,7 @@ function won()
     }
 }
 
-
+// reset button 
 reset.addEventListener("click",()=>{
     // console.log("runnung reset");
     setup();
@@ -358,15 +367,15 @@ reset.addEventListener("click",()=>{
 }
 );
 
+// toggle buttons 
 tbuttonarea.addEventListener("click",darkmodeact
 );
 tbutton.addEventListener("click",darkmodeact
 );
 tbuttonarea2.addEventListener("click",darkmodeact2
 );
-// tbutton2.addEventListener("click",darkmodeact2
-// );
 
+// dark mode 
 function darkmodeact()
 {
     
@@ -407,6 +416,8 @@ function darkmodeact()
     }
 }
 let cellblock;
+
+// challenge mode function 
 function darkmodeact2()
 {
     
@@ -438,6 +449,8 @@ Then box 12 is blocked for next 6 sec.`);
         blockedy = -1;
     }
 }
+
+// blocking a cell function 
 function CELLBLOCKfunc() {
     let r1= Math.random()*(n1)+0;
     let r2= Math.random()*(n2)+0;
@@ -453,6 +466,7 @@ function CELLBLOCKfunc() {
     blockedx=num1;
     blockedy=num2;
 }
+
 // =================================================================
 // TRASH CODES FOR TESTING PURPOSES
 
