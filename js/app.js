@@ -11,12 +11,16 @@ let counttimer = 0;
 let clock;
 let reset= document.getElementById("monitor4");
 let tbuttonarea = document.getElementById("buttonarea");
+let tbuttonarea2 = document.getElementById("buttonarea2");
 let tbutton = document.getElementById("button");
+let tbutton2 = document.getElementById("button2");
 let glass2 = document.getElementsByClassName("glass2");
 let bgm = document.querySelector("body");
 let colorno = 4;
 let colorno2 = 2;
 let matrixtype = n1*n2;
+let blockedx = -1;
+let blockedy = -1;
 let highestsc = localStorage.getItem(`highestList${matrixtype}`);
 hrline.style.width= `150px`;
 
@@ -66,8 +70,8 @@ boxarea.className=`glass2`;
 function checkphone() {
     let x = window.matchMedia("(max-width: 700px)");
     if (x.matches&&n2>4) { // If media query matches
-        boxsize = "55px";
-        boxareasize = "60px";
+        boxsize = "50px";
+        boxareasize = "55px";
         bgm.style.height=`80%`;
     } 
     else {
@@ -167,16 +171,16 @@ function setup()
             get_coordinates();
             cury = parseInt(element.offsetTop/70);
             curx = parseInt(element.offsetLeft/70);
-            console.log("x is"+curx);
-            console.log("y is"+cury);
-            console.log("req x is"+posx);
-            console.log("req y is"+posy);
+            // console.log("x is"+curx);
+            // console.log("y is"+cury);
+            // console.log("req x is"+posx);
+            // console.log("req y is"+posy);
             wonORnot();
             });
     });
 }
 function wonORnot() {
-    if (curx==posx||cury==posy) 
+    if ((curx==posx||cury==posy)&&((curx!=blockedx)||(cury!=blockedy))) 
     {
         // console.log("time to shift");
         swap(posx,posy,curx,cury);
@@ -225,10 +229,6 @@ function get_coordinates()
         }
     }
 }
-
-
-
-
 
 function swap(x1,y1,x2,y2) 
 {
@@ -296,7 +296,7 @@ function swap(x1,y1,x2,y2)
 function shuffle() 
 {
     let r1,r2 ;
-    for(let i = 0 ;i<3;i++)
+    for(let i = 0 ;i<1000;i++)
     {
         r1= Math.random()*(n1)+0;
         r2= Math.random()*(n2)+0;
@@ -353,7 +353,7 @@ reset.addEventListener("click",()=>{
     setup();
     // console.log("req x is"+posx);
     // console.log("req y is"+posy);
-    let countmoves = 0;
+    countmoves = 0;
     moves.innerText=`${countmoves}`;
 }
 );
@@ -362,6 +362,10 @@ tbuttonarea.addEventListener("click",darkmodeact
 );
 tbutton.addEventListener("click",darkmodeact
 );
+tbuttonarea2.addEventListener("click",darkmodeact2
+);
+// tbutton2.addEventListener("click",darkmodeact2
+// );
 
 function darkmodeact()
 {
@@ -370,7 +374,7 @@ function darkmodeact()
     // console.log("buttton clicked--"+theCSSprop);
 
     if (theCSSprop==`rgb(255, 255, 255)`) {
-        console.log("hi");
+        // console.log("hi");
         tbuttonarea.style.backgroundColor=`rgb(138, 247, 0)`;
         tbutton.style.transform=`translateX(26px)`;
         bgm.style.background=`rgb(50, 50, 51)`;
@@ -401,6 +405,53 @@ function darkmodeact()
         howto.style.color=`rgb(2, 140, 214)`;
         colorno2=2;
     }
+}
+let cellblock;
+function darkmodeact2()
+{
+    
+    let theCSSprop = window.getComputedStyle(tbuttonarea2, null).getPropertyValue("background-color");
+    // console.log("buttton clicked--"+theCSSprop);
+
+    if (theCSSprop==`rgb(255, 255, 255)`) {
+        // console.log("hi");
+        tbuttonarea2.style.backgroundColor=`rgb(138, 247, 0)`;
+        tbutton2.style.transform=`translateX(26px)`;
+        alert(`CHALLENGE MODE:
+        
+In this mode random boxes are blocked for 5secs
+Like box 10 is blocked for first 6sec
+Then box 12 is blocked for next 6 sec.`);
+    CELLBLOCKfunc();
+    cellblock = setInterval(() => {
+    CELLBLOCKfunc();
+    }, 6000);
+    // blockedy=1;
+    // blockedx=1;
+    }
+    else
+    {
+        tbuttonarea2.style.backgroundColor=`rgb(255, 255, 255)`;
+        tbutton2.style.transform=`translateX(0px)`;
+        clearInterval(cellblock);
+        blockedx = -1;
+        blockedy = -1;
+    }
+}
+function CELLBLOCKfunc() {
+    let r1= Math.random()*(n1)+0;
+    let r2= Math.random()*(n2)+0;
+    let num1 = parseInt(r1);
+    let num2 = parseInt(r2);
+    while (num1==posx&&num2==posy) {
+        r1= Math.random()*(n1)+0;
+        r2= Math.random()*(n2)+0;
+        num1 = parseInt(r1);
+        num2 = parseInt(r2);
+    }
+    // console.log("--==="+num1+"--==="+num2);
+    blockedx=num1;
+    blockedy=num2;
 }
 // =================================================================
 // TRASH CODES FOR TESTING PURPOSES
