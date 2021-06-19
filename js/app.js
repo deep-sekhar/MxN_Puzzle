@@ -53,7 +53,7 @@ howto.addEventListener("click",()=>{
 
 let boxareasize = "70px";
 let boxsize = "65px";
-
+let boxdist = 70;
 // start clock timer 
 function startclock() {
     counttimer = 0;
@@ -78,11 +78,13 @@ function checkphone() {
     if (x.matches&&n2>4) { // If media query matches
         boxsize = "50px";
         boxareasize = "55px";
+        boxdist=55;
         bgm.style.height=`80%`;
     } 
     else {
         boxareasize = "70px";
         boxsize = "65px";
+        boxdist = 70;
         bgm.style.height=`80%`;
     }
 }
@@ -164,8 +166,8 @@ function setup()
         element.addEventListener('click',function (){
             // console.log("hi");
             get_coordinates();
-            cury = parseInt(element.offsetTop/70);
-            curx = parseInt(element.offsetLeft/70);
+            cury = parseInt(element.offsetTop/boxdist);
+            curx = parseInt(element.offsetLeft/boxdist);
             console.log("x is"+curx);
             console.log("y is"+cury);
             console.log("req x is"+posx);
@@ -179,12 +181,12 @@ function setup()
         element.addEventListener('keypress',function (){
             // console.log("hi");
             get_coordinates();
-            cury = parseInt(element.offsetTop/70);
-            curx = parseInt(element.offsetLeft/70);
-            // console.log("x is"+curx);
-            // console.log("y is"+cury);
-            // console.log("req x is"+posx);
-            // console.log("req y is"+posy);
+            cury = parseInt(element.offsetTop/boxdist);
+            curx = parseInt(element.offsetLeft/boxdist);
+            console.log("x is"+curx);
+            console.log("y is"+cury);
+            console.log("req x is"+posx);
+            console.log("req y is"+posy);
             wonORnot();
             });
     });
@@ -318,7 +320,7 @@ function shuffle()
         let num1 = parseInt(r1);
         let num2 = parseInt(r2);
         // console.log("--"+num1+"--"+num2);
-        swap(posx,posy,num1,num2);
+        swap(posx,posy,num2,num1);
         get_coordinates();
     } 
     let w = won();
