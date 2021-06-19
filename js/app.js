@@ -18,6 +18,7 @@ let colorno = 4;
 let colorno2 = 2;
 let matrixtype = n1*n2;
 let highestsc = localStorage.getItem(`highestList${matrixtype}`);
+hrline.style.width= `150px`;
 
 if (highestsc==null) {
     highestsc=-1;        
@@ -35,13 +36,17 @@ else{
 
 howto.addEventListener("click",()=>{
     alert(`INSTRUCTIONS:
+
     1.Click on boxes having the blank box in its row or column
     2.Doing this  will shift the blank box to that  position
-    3.Like this shift all the boxes to arrange them  in order
-    starting with box numbered 1 on top left
+    3.Like this shift all the boxes to arrange them  in order starting with 
+    box numbered 1 on top left , 2 beside it and so on ..
     
     Best of luck!`)
 });
+
+let boxareasize = "70px";
+let boxsize = "65px";
 
 function startclock() {
     counttimer = 0;
@@ -56,7 +61,23 @@ startclock();
 
 let derivedbox = document.getElementsByClassName("derivedbox");
 let posx, posy, curx, cury;
-boxarea.className=`glass2`;
+boxarea.className=`glass2`; 
+
+function checkphone() {
+    let x = window.matchMedia("(max-width: 700px)");
+    if (x.matches&&n2>4) { // If media query matches
+        boxsize = "55px";
+        boxareasize = "60px";
+        bgm.style.height=`80%`;
+    } 
+    else {
+        boxareasize = "70px";
+        boxsize = "65px";
+        bgm.style.height=`80%`;
+    }
+}
+
+
 
 setup();
 
@@ -66,19 +87,14 @@ function setup()
 
     n1 = document.getElementById("options1").value;
     n2 = document.getElementById("options2").value;
-    hrline.style.width= `calc(${n2}*100px)`;
+    // hrline.style.width= `calc(${n2}*100px)`;
 
-    // let x = window.matchMedia("(max-width: 700px)");
-    // if (x.matches) { // If media query matches
-    //     document.body.style.backgroundColor = "yellow";
-    //   } else {
-    //     document.body.style.backgroundColor = "pink";
-    //   }
+    checkphone();
 
-    boxarea.style.cssText=` transition: all 1s ease 0s; width:calc(${n2}*70px); height:calc(${n1}*70px);margin-bottom:16px;font-size: 1.8rem;margin-top:20px; z-index: 2;`;
+    boxarea.style.cssText=` transition: all 0.8s linear 0s; width:calc(${n2}*${boxareasize}); height:calc(${n1}*${boxareasize});margin-bottom:16px;font-size: 1.8rem;margin-top:20px; z-index: 2;`;
 
     if (colorno2==1) {
-        boxarea.style.boxShadow=`10px 10px 20px 1px rgb(116, 114, 114),-10px -10px 20px 1px rgb(116, 114, 114)`;
+        boxarea.style.boxShadow=`10px 10px 15px 1px rgb(99, 97, 97),-10px -10px 15px 1px rgb(99, 97, 97)`;
     }
 
     let str ="";
@@ -97,17 +113,16 @@ function setup()
                 {
                     boxes[i][j]=i*n2+(j+1);
                     // console.log(boxes[i][j]);
-                    str+=`<div style="display:flex; align-items:center; justify-content:center; position:absolute; top:calc(${i}*70px); left:calc(${j}*70px); height:65px; width:65px; transition: all 0.5s ease 0s" class="glass${colorno} derivedbox" >${boxes[i][j]}</div>`;
+                    str+=`<div style="display:flex; align-items:center; justify-content:center; position:absolute; top:calc(${i}*${boxareasize}); left:calc(${j}*${boxareasize}); height:${boxsize}; width:${boxsize}; transition: all 0.5s ease 0s" class="glass${colorno} derivedbox" >${boxes[i][j]}</div>`;
                 }
                 else
                 {
-                    str+=`<div class="glass${colorno} derivedbox" style="display:flex; align-items:center; justify-content:center; position:absolute; top:calc(${i}*70px); left:calc(${j}*70px); height:65px; width:65px; transition: all 0.5s ease 0s"> </div>`;
+                    str+=`<div class="glass${colorno} derivedbox" style="display:flex; align-items:center; justify-content:center; position:absolute; top:calc(${i}*${boxareasize}); left:calc(${j}*${boxareasize}); height:${boxsize}; width:${boxsize}; transition: all 0.5s ease 0s"> </div>`;
                 }
             }
         }
     }
     boxarea.innerHTML=str;
-    hrline.style.width= `calc(${n2}*100px)`;
 
     get_coordinates();
     shuffle();
@@ -141,38 +156,55 @@ function setup()
             console.log("y is"+cury);
             console.log("req x is"+posx);
             console.log("req y is"+posy);
-            if (curx==posx||cury==posy) 
-            {
-                // console.log("time to shift");
-                swap(posx,posy,curx,cury);
-                countmoves++;
-                moves.innerText=`${countmoves}`;
-            }
+            wonORnot();
+            });
+    });
+    Array.from(derivedbox).forEach(element => {
+        get_coordinates();
+        // console.log("running click");
+        element.addEventListener('keypress',function (){
+            // console.log("hi");
             get_coordinates();
-            let w = won();
-            if (w==1) 
-            {
-                alert('CONGO! NAILED IT. Reset to play again');
-                clearInterval(clock);
-                let gottime =  counttimer;
-                if (highestsc==-1) 
-                {
-                    highestsc = gottime;
-                }
-                else if(gottime<highestsc)
-                {
-                    highestsc = gottime;
-                }
-                localStorage.setItem(`highestList${matrixtype}`,highestsc);
-                highest.innerHTML=`${highestsc}`;
-                let hsec = highestsc%60;
-                let hmin = parseInt(highestsc/60);
-                highest.innerHTML=`${hmin}m ${hsec}s`;
-            }
+            cury = parseInt(element.offsetTop/70);
+            curx = parseInt(element.offsetLeft/70);
+            console.log("x is"+curx);
+            console.log("y is"+cury);
+            console.log("req x is"+posx);
+            console.log("req y is"+posy);
+            wonORnot();
             });
     });
 }
-
+function wonORnot() {
+    if (curx==posx||cury==posy) 
+    {
+        // console.log("time to shift");
+        swap(posx,posy,curx,cury);
+        countmoves++;
+        moves.innerText=`${countmoves}`;
+    }
+    get_coordinates();
+    let w = won();
+    if (w==1) 
+    {
+        alert('CONGO! NAILED IT. Reset to play again');
+        clearInterval(clock);
+        let gottime =  counttimer;
+        if (highestsc==-1) 
+        {
+            highestsc = gottime;
+        }
+        else if(gottime<highestsc)
+        {
+            highestsc = gottime;
+        }
+        localStorage.setItem(`highestList${matrixtype}`,highestsc);
+        highest.innerHTML=`${highestsc}`;
+        let hsec = highestsc%60;
+        let hmin = parseInt(highestsc/60);
+        highest.innerHTML=`${hmin}m ${hsec}s`;
+    }
+}
 
 function get_coordinates()
 {
@@ -264,7 +296,7 @@ function swap(x1,y1,x2,y2)
 function shuffle() 
 {
     let r1,r2 ;
-    for(let i = 0 ;i<1000;i++)
+    for(let i = 0 ;i<3;i++)
     {
         r1= Math.random()*(n1)+0;
         r2= Math.random()*(n2)+0;
@@ -341,9 +373,9 @@ function darkmodeact()
         console.log("hi");
         tbuttonarea.style.backgroundColor=`rgb(138, 247, 0)`;
         tbutton.style.transform=`translateX(26px)`;
-        bgm.style.backgroundColor=`rgb(50, 50, 51)`;
+        bgm.style.background=`rgb(50, 50, 51)`;
         Array.from(glass2).forEach(element => {
-            element.style.boxShadow=`10px 10px 20px 1px rgb(116, 114, 114),-10px -10px 20px 1px rgb(116, 114, 114)`;
+            element.style.boxShadow=`10px 10px 15px 1px rgb(99, 97, 97),-10px -10px 15px 1px rgb(99, 97, 97)`;
         });
         options1.style.backgroundColor=`rgb(50, 50, 51)`;
         options2.style.backgroundColor=`rgb(50, 50, 51)`;
@@ -357,7 +389,7 @@ function darkmodeact()
     {
         tbuttonarea.style.backgroundColor=`rgb(255, 255, 255)`;
         tbutton.style.transform=`translateX(0px)`;
-        bgm.style.backgroundColor=`rgb(0, 148, 228)`;
+        bgm.style.background=`rgb(0, 148, 228)`;
         Array.from(glass2).forEach(element => {
             element.style.boxShadow=`15px 15px 20px 1px rgb(54, 106, 251,0.8),-15px -15px 20px 1px rgb(54, 106, 251,0.8)`;
         });

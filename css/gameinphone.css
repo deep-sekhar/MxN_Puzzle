@@ -13,3 +13,13 @@ html{
     cursor: pointer;
     font-size: 1.5rem;
 }
+#container{
+    margin: 15px;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    /* position: abssolute; */
+    /* left: 0pxs; */
+}
