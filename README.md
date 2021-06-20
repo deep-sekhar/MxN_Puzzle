@@ -4,19 +4,29 @@
     
 # MxN Puzzle
 
-A  MxN Puzzle by a beginner in web develoopment
-
-
-## License
-
-[MIT](https://choosealicense.com/licenses/mit/)
+A  MxN Puzzle by a beginner in web develoopment all from Scratch without any external site help or frameworks.
 
   
 ## Authors
 
 - Deep Sekhar Ghosh
 
+
+## Features
+
+- EVERYTHING built from SCRATCH without any external site help or frameworks
+- Light/dark mode toggle
+- Scores stored in local storage
+- Challenge mode available
+- Cross platform
+- User can set own preferable matrix
+
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
   
+
 ## Documentation
 
 INSTRUCTIONS:
@@ -35,16 +45,8 @@ CHALLENGE MODE:
     Then box 12 is blocked for next 6 sec.
 
   
-## Features
-
-- Light/dark mode toggle
-- Scores stored in local storage
-- Challenge mode
-- Cross platform
-
-  
 ## Screenshots
-Mockups by reviewed -->https://previewed.app
+Mockups by previewed 
 <!-- ![App Screenshot](https://github.com/deep-sekhar/MxN_Puzzle/blob/main/img/image1.jpeg?raw=true)
 ![App Screenshot](https://github.com/deep-sekhar/MxN_Puzzle/blob/main/img/image2.jpeg?raw=true) -->
 
