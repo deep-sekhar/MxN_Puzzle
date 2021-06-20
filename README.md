@@ -4,7 +4,7 @@
     
 # MxN Puzzle
 
-A  MxN Puzzle by a beginner in web develoopment all from Scratch without any external site help or frameworks.
+A  MxN Puzzle by a beginner in web develoopment .
 
   
 ## Authors
@@ -14,7 +14,7 @@ A  MxN Puzzle by a beginner in web develoopment all from Scratch without any ext
 
 ## Features
 
-- EVERYTHING built from SCRATCH without any external site help or frameworks
+- all from Scratch without any external site help or frameworks
 - Light/dark mode toggle
 - Scores stored in local storage
 - Challenge mode available
