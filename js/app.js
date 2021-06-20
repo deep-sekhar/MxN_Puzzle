@@ -126,11 +126,11 @@ function setup()
                 {
                     boxes[i][j]=i*n2+(j+1);
                     // console.log(boxes[i][j]);
-                    str+=`<div style="display:flex; align-items:center; justify-content:center; position:absolute; top:calc(${i}*${boxareasize}); left:calc(${j}*${boxareasize}); height:${boxsize}; width:${boxsize}; transition: all 1.5s ease 0s" class="glass${colorno} derivedbox" >${boxes[i][j]}</div>`;
+                    str+=`<div style="display:flex; align-items:center; justify-content:center; position:absolute; top:calc(${i}*${boxareasize}); left:calc(${j}*${boxareasize}); height:${boxsize}; width:${boxsize}; transition: all 0.8s ease 0s" class="glass${colorno} derivedbox" >${boxes[i][j]}</div>`;
                 }
                 else
                 {
-                    str+=`<div class="glass${colorno} derivedbox" style="display:flex; align-items:center; justify-content:center; position:absolute; top:calc(${i}*${boxareasize}); left:calc(${j}*${boxareasize}); height:${boxsize}; width:${boxsize}; transition: all 1.5s ease 0s; background:white"> </div>`;
+                    str+=`<div class="glass${colorno} derivedbox" style="display:flex; align-items:center; justify-content:center; position:absolute; top:calc(${i}*${boxareasize}); left:calc(${j}*${boxareasize}); height:${boxsize}; width:${boxsize}; transition: all 0.8s ease 0s; background:white"> </div>`;
                 }
             }
         }
