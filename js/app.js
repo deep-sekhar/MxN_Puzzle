@@ -112,6 +112,9 @@ function setup()
         boxarea.style.boxShadow=`10px 10px 15px 1px rgb(99, 97, 97),-10px -10px 15px 1px rgb(99, 97, 97)`;
     }
 
+    countmoves = 0;
+    moves.innerText=`${countmoves}`;
+
     let str ="";
     boxes = new Array(n1);
     // setting up the boxes  
