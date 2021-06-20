@@ -126,11 +126,11 @@ function setup()
                 {
                     boxes[i][j]=i*n2+(j+1);
                     // console.log(boxes[i][j]);
-                    str+=`<div style="display:flex; align-items:center; justify-content:center; position:absolute; top:calc(${i}*${boxareasize}); left:calc(${j}*${boxareasize}); height:${boxsize}; width:${boxsize}; transition: all 0.5s ease 0s" class="glass${colorno} derivedbox" >${boxes[i][j]}</div>`;
+                    str+=`<div style="display:flex; align-items:center; justify-content:center; position:absolute; top:calc(${i}*${boxareasize}); left:calc(${j}*${boxareasize}); height:${boxsize}; width:${boxsize}; transition: all 1.5s ease 0s" class="glass${colorno} derivedbox" >${boxes[i][j]}</div>`;
                 }
                 else
                 {
-                    str+=`<div class="glass${colorno} derivedbox" style="display:flex; align-items:center; justify-content:center; position:absolute; top:calc(${i}*${boxareasize}); left:calc(${j}*${boxareasize}); height:${boxsize}; width:${boxsize}; transition: all 0.5s ease 0s"> </div>`;
+                    str+=`<div class="glass${colorno} derivedbox" style="display:flex; align-items:center; justify-content:center; position:absolute; top:calc(${i}*${boxareasize}); left:calc(${j}*${boxareasize}); height:${boxsize}; width:${boxsize}; transition: all 1.5s ease 0s; background:white"> </div>`;
                 }
             }
         }
@@ -257,22 +257,40 @@ function swap(x1,y1,x2,y2)
             // console.log("x1--"+x1+"x2---"+x2);
             for(let i=x1;i<x2;i++)
             {
+                // derivedbox[y1*n2+i].style.transform=`translate`;
+                // derivedbox[y1*n2+i+1].style.transform=`scale(0)`;
+                derivedbox[y1*n2+i].style.transform=`translateX(${boxareasize})`;
+                derivedbox[y1*n2+i+1].style.transform=`translateX(-${boxareasize})`;
                 let temp1 =  (derivedbox[y1*n2+i].innerText);
                 let temp2 = (derivedbox[y1*n2+i+1].innerText);
                 // console.log("---"+temp1+"--"+temp2);
                 derivedbox[y1*n2+i].innerText=`${temp2}`;
                 derivedbox[y1*n2+i+1].innerText=`${temp1}`;
+                derivedbox[y1*n2+i].style.transform=`translateX(0)`;
+                derivedbox[y1*n2+i+1].style.transform=`translateX(0)`;
+                derivedbox[y1*n2+i+1].style.background="white";
+                derivedbox[y1*n2+i].style.background="";
+                // derivedbox[y1*n2+i].style.transform=`scale(1)`;
+                // derivedbox[y1*n2+i+1].style.transform=`scale(1)`;
             }    
         }
         else
         {
             for(let i=x1;i>x2;i--)
             {
+                derivedbox[y1*n2+i].style.transform=`translateX(-${boxareasize})`;
+                derivedbox[y1*n2+i-1].style.transform=`translateX(${boxareasize})`;
                 let temp1 =  (derivedbox[y1*n2+i].innerText);
                 let temp2 = (derivedbox[y1*n2+i-1].innerText);
                 // console.log("---"+temp1+"--"+temp2);
                 derivedbox[y1*n2+i].innerText=`${temp2}`;
                 derivedbox[y1*n2+i-1].innerText=`${temp1}`;
+                derivedbox[y1*n2+i].style.transform=`translateX(0)`;
+                derivedbox[y1*n2+i-1].style.transform=`translateX(0)`;
+                // derivedbox[y1*n2+i].style.transform=`scale(1)`;
+                // derivedbox[y1*n2+i-1].style.transform=`scale(1)`;
+                derivedbox[y1*n2+i-1].style.background="white";
+                derivedbox[y1*n2+i].style.background="";
             }    
 
         }
@@ -286,22 +304,34 @@ function swap(x1,y1,x2,y2)
             // console.log("x1--"+x1+"x2---"+x2);
             for(let i=y1;i<y2;i++)
             {
+                derivedbox[i*n2+x1].style.transform=`translateY(${boxareasize})`;
+                derivedbox[(i+1)*n2+x1].style.transform=`translateY(-${boxareasize})`;
                 let temp1 =  (derivedbox[i*n2+x1].innerText);
                 let temp2 = (derivedbox[(i+1)*n2+x1].innerText);
                 // console.log("---"+temp1+"--"+temp2);
                 derivedbox[i*n2+x1].innerText=`${temp2}`;
                 derivedbox[(i+1)*n2+x1].innerText=`${temp1}`;
+                derivedbox[i*n2+x1].style.transform=`translateY(0)`;
+                derivedbox[(i+1)*n2+x1].style.transform=`translateY(0)`;
+                derivedbox[(i+1)*n2+x1].style.background="white";
+                derivedbox[i*n2+x1].style.background="";
             }    
         }
         else
         {
             for(let i=y1;i>y2;i--)
             {
+                derivedbox[i*n2+x1].style.transform=`translateY(-${boxareasize})`;
+                derivedbox[(i-1)*n2+x1].style.transform=`translateY(${boxareasize})`;
                 let temp1 =  (derivedbox[i*n2+x1].innerText);
                 let temp2 = (derivedbox[(i-1)*n2+x1].innerText);
                 // console.log("---"+temp1+"--"+temp2);
                 derivedbox[i*n2+x1].innerText=`${temp2}`;
                 derivedbox[(i-1)*n2+x1].innerText=`${temp1}`;
+                derivedbox[i*n2+x1].style.transform=`translateY(0)`;
+                derivedbox[(i-1)*n2+x1].style.transform=`translateY(0)`;
+                derivedbox[(i-1)*n2+x1].style.background="white";
+                derivedbox[i*n2+x1].style.background="";
             }    
 
         }
