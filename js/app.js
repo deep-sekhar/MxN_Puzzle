@@ -22,7 +22,22 @@ let matrixtype = n1*n2;
 let blockedx = -1;
 let blockedy = -1;
 let highestsc = localStorage.getItem(`highestList${matrixtype}`);
+// let loading = document.getElementsByClassName("loader");
 hrline.style.width= `150px`;
+
+
+// loading animation effects 
+let boot = function() {
+    document.querySelector("#loader").style.display=`flex`;
+    {
+        {
+            setTimeout(() => {
+               document.querySelector("#loader").style.display=`none`;
+        }, 1300);
+        }
+    }
+};
+
 
 // get highest store fro local storage  
 if (highestsc==null) {
@@ -34,10 +49,7 @@ else{
     let hmin = parseInt(highestsc/60);
     highest.innerHTML=`${hmin}m ${hsec}s`;
 }
-// let highestscObj;
-// else{
-//     highestscObj=JSON.parse(highestsc);
-// }
+
 
 // how to play instrtuctions 
 howto.addEventListener("click",()=>{
@@ -86,6 +98,20 @@ function checkphone() {
         boxsize = "65px";
         boxdist = 70;
         bgm.style.height=`80%`;
+        // booteffect();
+    }
+    if (x.matches) {
+    }
+    else{
+        document.onreadystatechange = function() {
+            document.querySelector("#loader").style.display=`flex`;
+            if (document.readyState !== "complete") {
+                setTimeout(() => {
+                   document.querySelector("#loader").style.display=`none`;
+            }, 1000);
+            } 
+        };
+        boot();
     }
 }
 
@@ -93,9 +119,11 @@ function checkphone() {
 // run setup 
 setup();
 
+
 // setup the boxes 
 function setup()
 {
+    // loading.style.display = "flex";
     console.log(colorno2);
 
     n1 = document.getElementById("options1").value;
@@ -129,16 +157,20 @@ function setup()
                 {
                     boxes[i][j]=i*n2+(j+1);
                     // console.log(boxes[i][j]);
-                    str+=`<div style="display:flex; align-items:center; justify-content:center; position:absolute; top:calc(${i}*${boxareasize}); left:calc(${j}*${boxareasize}); height:${boxsize}; width:${boxsize}; transition: all 0.8s ease 0s" class="glass${colorno} derivedbox" >${boxes[i][j]}</div>`;
+                    str+=`<div style="display:flex; align-items:center; justify-content:center; position:absolute; top:calc(${i}*${boxareasize}); left:calc(${j}*${boxareasize}); height:${boxsize}; width:${boxsize}; transition: all 0.3s ease 0s" class="glass${colorno} derivedbox" >${boxes[i][j]}</div>`;
                 }
                 else
                 {
-                    str+=`<div class="glass${colorno} derivedbox" style="display:flex; align-items:center; justify-content:center; position:absolute; top:calc(${i}*${boxareasize}); left:calc(${j}*${boxareasize}); height:${boxsize}; width:${boxsize}; transition: all 0.8s ease 0s; background:white"> </div>`;
+                    str+=`<div class="glass${colorno} derivedbox" style="display:flex; align-items:center; justify-content:center; position:absolute; top:calc(${i}*${boxareasize}); left:calc(${j}*${boxareasize}); height:${boxsize}; width:${boxsize}; transition: all 0.3s ease 0s; background:white"> </div>`;
                 }
             }
         }
     }
+
     boxarea.innerHTML=str;
+
+    // boxarea.style.visibility=`hidden`;
+    // document.querySelector("#loader").style.display=`flex`;
 
     // shuffle the boxes  
     get_coordinates();
@@ -193,7 +225,9 @@ function setup()
             wonORnot();
             });
     });
+    // boot();
 }
+
 
 // see if won or not 
 function wonORnot() {
@@ -432,6 +466,7 @@ function darkmodeact()
         howto.style.backgroundColor=`rgb(44, 43, 43)`;
         howto.style.color=`white`;
         colorno2=1;
+        document.querySelector("#loader").style.backgroundColor=`rgb(44, 43, 43)`;
     }
     else
     {
@@ -448,10 +483,11 @@ function darkmodeact()
         howto.style.backgroundColor=`white`;
         howto.style.color=`rgb(2, 140, 214)`;
         colorno2=2;
+        document.querySelector("#loader").style.backgroundColor=`rgb(54, 106, 251,0.8)`;
     }
 }
-let cellblock;
 
+let cellblock;
 // challenge mode function 
 function darkmodeact2()
 {
