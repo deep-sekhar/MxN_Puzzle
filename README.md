@@ -16,6 +16,7 @@ A  MxN Puzzle by a beginner in web develoopment .
 
 - all from Scratch without any external site help or frameworks
 - Light/dark mode toggle
+- Loading and page animations
 - Scores stored in local storage
 - Challenge mode available
 - Cross platform
