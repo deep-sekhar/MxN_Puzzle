@@ -33,7 +33,7 @@ let boot = function() {
         {
             setTimeout(() => {
                document.querySelector("#loader").style.display=`none`;
-        }, 1300);
+        }, 1200);
         }
     }
 };
@@ -104,12 +104,15 @@ function checkphone() {
     }
     else{
         document.onreadystatechange = function() {
-            document.querySelector("#loader").style.display=`flex`;
             if (document.readyState !== "complete") {
+                document.querySelector("#loader").style.display=`flex`;
+            }
+            else
+            {
                 setTimeout(() => {
-                   document.querySelector("#loader").style.display=`none`;
-            }, 1000);
-            } 
+                    document.querySelector("#loader").style.display=`none`;
+             }, 1200);
+            }
         };
         boot();
     }
@@ -537,6 +540,28 @@ function CELLBLOCKfunc() {
     blockedx=num1;
     blockedy=num2;
 }
+
+// security purpose 
+document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+  });
+document.onkeydown = function(e) {
+    if(event.keyCode == 123) {
+       return false;
+    }
+    if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
+       return false;
+    }
+    if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) {
+       return false;
+    }
+    if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) {
+       return false;
+    }
+    if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
+       return false;
+    }
+  }
 
 // =================================================================
 // TRASH CODES FOR TESTING PURPOSES
