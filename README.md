@@ -14,7 +14,7 @@ A  MxN Puzzle by a beginner in web develoopment .
 
 ## Features
 
-- all from Scratch without any external site help or frameworks
+- all from Scratch without any frameworks
 - Light/dark mode toggle
 - Loading and page animations
 - Scores stored in local storage
