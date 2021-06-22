@@ -28,10 +28,12 @@ hrline.style.width= `150px`;
 
 // loading animation effects 
 let boot = function() {
+    bgm.style.visibility=`hidden`;
     document.querySelector("#loader").style.display=`flex`;
     {
         {
             setTimeout(() => {
+               bgm.style.visibility=``;
                document.querySelector("#loader").style.display=`none`;
         }, 1200);
         }
@@ -102,19 +104,21 @@ function checkphone() {
     }
     if (x.matches) {
     }
+    // loading animation in big screens 
     else{
         document.onreadystatechange = function() {
             if (document.readyState !== "complete") {
                 document.querySelector("#loader").style.display=`flex`;
+                bgm.style.visibility=`hidden`;
             }
             else
             {
                 setTimeout(() => {
+                    bgm.style.visibility=``;
                     document.querySelector("#loader").style.display=`none`;
-             }, 1200);
+                }, 1200);
             }
         };
-        boot();
     }
 }
 

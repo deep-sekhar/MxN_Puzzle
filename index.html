@@ -10,7 +10,9 @@
     <link rel="stylesheet" href="css/gameonphone2.css" media="screen and (max-width:500px)">
 </head>
 <div id="loader">
-    <span>{</span><span>}</span>
+    <div id="load">
+        <span>{</span><span>}</span>
+    </div>
 </div>
 <body>
     <nav id="bar">
@@ -47,14 +49,14 @@
         <div id="monitor" class="glass2">
             <div id="monitor1" class="glass3">
                 <span>Select matrix here:</span>
-                <select name="n" id="options1" onchange="setup()">
+                <select name="n" id="options1" onchange="boot()" onchange="setup()" >
                     <option value="3" class="nval"> 3 </option>
                     <option value="4" class="nval"selected> 4 </option>
                     <option value="5" class="nval" > 5 </option>
                     <option value="6" class="nval"> 6 </option>
                 </select>
                 <span>x</span>
-                <select name="n" id="options2" onchange="setup()">
+                <select name="n" id="options2" onchange="boot()" onchange="setup()">
                     <option value="3" class="nval"> 3 </option>
                     <option value="4" class="nval" selected> 4 </option>
                     <option value="5" class="nval" > 5 </option>
@@ -69,7 +71,7 @@
                 <span>Moves:</span>
                 <span id="moves">0</span>
             </div>
-            <div id="monitor4" class="glass3" style="color: rgb(2, 140, 214); background-color: white;">
+            <div id="monitor4" class="glass3" style="color: rgb(2, 140, 214); background-color: white;" onclick="boot()">
                 Reset
             </div>
         </div>
