@@ -52,6 +52,8 @@ else{
     highest.innerHTML=`${hmin}m ${hsec}s`;
 }
 
+document.getElementById("options1").addEventListener("change",setup);
+document.getElementById("options2").addEventListener("change",setup);
 
 // how to play instrtuctions 
 howto.addEventListener("click",()=>{
