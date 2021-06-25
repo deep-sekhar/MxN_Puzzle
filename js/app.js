@@ -12,8 +12,10 @@ let clock;
 let reset= document.getElementById("monitor4");
 let tbuttonarea = document.getElementById("buttonarea");
 let tbuttonarea2 = document.getElementById("buttonarea2");
+let tbuttonarea3 = document.getElementById("buttonarea3");
 let tbutton = document.getElementById("button");
 let tbutton2 = document.getElementById("button2");
+let tbutton3 = document.getElementById("button3");
 let glass2 = document.getElementsByClassName("glass2");
 let bgm = document.querySelector("body");
 let colorno = 4;
@@ -24,21 +26,16 @@ let blockedy = -1;
 let highestsc = localStorage.getItem(`highestList${matrixtype}`);
 // let loading = document.getElementsByClassName("loader");
 hrline.style.width= `150px`;
+let bk = 0;
 
 
-// loading animation effects 
-let boot = function() {
-    bgm.style.visibility=`hidden`;
-    document.querySelector("#loader").style.display=`flex`;
-    {
-        {
-            setTimeout(() => {
-               bgm.style.visibility=``;
-               document.querySelector("#loader").style.display=`none`;
-        }, 1200);
-        }
-    }
-};
+changebars= ()=>{
+        Array.from(document.getElementsByClassName("sider")).forEach(element=>{
+        element.classList.toggle("changer");
+        });
+        // x.classList.toggle("change");
+}
+
 
 
 // get highest store fro local storage  
@@ -218,21 +215,7 @@ function setup()
             wonORnot();
             });
     });
-    Array.from(derivedbox).forEach(element => {
-        get_coordinates();
-        // console.log("running click");
-        element.addEventListener('keypress',function (){
-            // console.log("hi");
-            get_coordinates();
-            cury = parseInt(element.offsetTop/boxdist);
-            curx = parseInt(element.offsetLeft/boxdist);
-            console.log("x is"+curx);
-            console.log("y is"+cury);
-            console.log("req x is"+posx);
-            console.log("req y is"+posy);
-            wonORnot();
-            });
-    });
+
     countmoves=0;
     moves.innerText=`${countmoves}`;
     
@@ -455,6 +438,8 @@ tbutton.addEventListener("click",darkmodeact
 );
 tbuttonarea2.addEventListener("click",darkmodeact2
 );
+tbuttonarea3.addEventListener("click",imgmodeact
+);
 
 // dark mode 
 function darkmodeact()
@@ -533,6 +518,27 @@ Then box 12 may be blocked for next 6 secs.`);
     }
 }
 
+// image mode func 
+function imgmodeact() {
+    let theCSSprop = window.getComputedStyle(tbuttonarea3, null).getPropertyValue("background-color");
+    // console.log("buttton clicked--"+theCSSprop);
+
+    if (theCSSprop==`rgb(255, 255, 255)`) {
+        // console.log("hi");
+        tbuttonarea3.style.backgroundColor=`rgb(138, 247, 0)`;
+        tbutton3.style.transform=`translateX(26px)`;
+        bk=1;
+        setup();
+    }
+    else
+    {
+        tbuttonarea3.style.backgroundColor=`rgb(255, 255, 255)`;
+        tbutton3.style.transform=`translateX(0px)`;
+        bk=0;
+        setup();
+    }
+}
+
 // blocking a cell function 
 function CELLBLOCKfunc() {
     let r1= Math.random()*(n1)+0;
@@ -551,9 +557,9 @@ function CELLBLOCKfunc() {
 }
 
 // security purpose 
-document.addEventListener('contextmenu', function(e) {
-    e.preventDefault();
-  });
+// document.addEventListener('contextmenu', function(e) {
+//     e.preventDefault();
+//   });
 document.onkeydown = function(e) {
     if(event.keyCode == 123) {
        return false;
@@ -574,6 +580,29 @@ document.onkeydown = function(e) {
 
 // =================================================================
 // TRASH CODES FOR TESTING PURPOSES
+// autoclose = ()=>{
+    // const details = document.querySelectorAll(details);
+    // Array.from("details").forEach(element => {
+    //     element.removeAttribute("open");
+    // });
+    // bar.style.backgroundColor=red;
+    // document.getElementById("op-full").removeAttribute("open");
+    // document.querySelector("#op").removeAttribute("open")
+// }
+
+// loading animation effects 
+// let boot = function() {
+//     bgm.style.visibility=`hidden`;
+//     document.querySelector("#loader").style.display=`flex`;
+//     {
+//         {
+//             setTimeout(() => {
+//                bgm.style.visibility=``;
+//                document.querySelector("#loader").style.display=`none`;
+//         }, 1200);
+//         }
+//     }
+// };
 
 // Array.from(derivedbox).forEach(element => {
 //     get_coordinates();

@@ -16,25 +16,50 @@
 </div>
 <body>
     <nav id="bar">
-        <div class="toggle-bar">
-            Dark-mode:
-            <div id="buttonarea" class="buttonareaDeep">
-                <div id="button" class="buttonDeep">
-
+        <div id="op">
+            <details >
+                <summary onclick="changebars()">
+                    <div id="allopt">
+                        <div class="sider">
+                            <div class="bar1"></div>
+                            <div class="bar2"></div>
+                            <div class="bar3"></div>
+                        </div>     
+                    </div>
+                </summary onmouseout="autoclose()">
+                <div id="op-full">
+                <div class="toggle-bar">
+                    Dark-mode:
+                    <div id="buttonarea" class="buttonareaDeep">
+                        <div id="button" class="buttonDeep">
+        
+                        </div>
+                    </div>
+                </div>
+                <div class="toggle-bar">
+                    Challenge-mode:
+                    <div id="buttonarea2" class="buttonareaDeep">
+                        <div id="button2" class="buttonDeep">
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="toggle-bar">
+                    Image-mode:
+                    <div id="buttonarea3" class="buttonareaDeep">
+                        <div id="button3" class="buttonDeep">
+                            
+                        </div>
+                    </div>
                 </div>
             </div>
+            </details>
         </div>
+  
         <div id="logo">
             <img src="img/logo.png" alt="">
         </div>
-        <div class="toggle-bar">
-            Challenge-mode:
-            <div id="buttonarea2" class="buttonareaDeep">
-                <div id="button2" class="buttonDeep">
-                    
-                </div>
-            </div>
-        </div>
+
     </nav>
     <div id="container">
         <h4 style="text-align: center;">Arrange the boxes in order.</h4>
@@ -49,14 +74,14 @@
         <div id="monitor" class="glass2">
             <div id="monitor1" class="glass3">
                 <span>Select matrix here:</span>
-                <select name="n" id="options1" onchange="boot()" >
+                <select name="n" id="options1" >
                     <option value="3" class="nval"> 3 </option>
                     <option value="4" class="nval"selected> 4 </option>
                     <option value="5" class="nval" > 5 </option>
                     <option value="6" class="nval"> 6 </option>
                 </select>
                 <span>x</span>
-                <select name="n" id="options2" onchange="boot()" >
+                <select name="n" id="options2" >
                     <option value="3" class="nval"> 3 </option>
                     <option value="4" class="nval" selected> 4 </option>
                     <option value="5" class="nval" > 5 </option>
@@ -71,7 +96,7 @@
                 <span>Moves:</span>
                 <span id="moves">0</span>
             </div>
-            <div id="monitor4" class="glass3" style="color: rgb(2, 140, 214); background-color: white;" onclick="boot()">
+            <div id="monitor4" class="glass3" style="color: rgb(2, 140, 214); background-color: white;" >
                 Reset
             </div>
         </div>
