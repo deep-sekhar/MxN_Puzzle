@@ -28,7 +28,7 @@ let highestsc = localStorage.getItem(`highestList${matrixtype}`);
 hrline.style.width= `150px`;
 let bk = 0;
 
-
+// toggle bars 
 changebars= ()=>{
         Array.from(document.getElementsByClassName("sider")).forEach(element=>{
         element.classList.toggle("changer");
@@ -139,13 +139,6 @@ function setup()
     // see if it is a phone 
     checkphone();
 
-    // box styles 
-    boxarea.style.cssText=` transition: all 0.8s linear 0s; width:calc(${n2}*${boxareasize}); height:calc(${n1}*${boxareasize});margin-bottom:16px;font-size: 1.8rem;margin-top:20px; z-index: 2;`;
-
-    if (colorno2==1) {
-        boxarea.style.boxShadow=`10px 10px 15px 1px rgb(99, 97, 97),-10px -10px 15px 1px rgb(99, 97, 97)`;
-    }
-
     countmoves = 0;
 
     let str ="";
@@ -156,6 +149,19 @@ function setup()
         tbuttonarea3.style.backgroundColor=`rgb(255, 255, 255)`;
         tbutton3.style.transform=`translateX(0px)`;
         bk=0;
+    }
+    
+    if (bk==1) {
+        boxareasize = "80px";
+        boxsize = "75px";
+        boxdist = 80;
+    }
+
+    // box styles 
+    boxarea.style.cssText=` transition: all 0.8s linear 0s; width:calc(${n2}*${boxareasize}); height:calc(${n1}*${boxareasize});margin-bottom:16px;font-size: 1.8rem;margin-top:20px; z-index: 2;`;
+
+    if (colorno2==1) {
+        boxarea.style.boxShadow=`10px 10px 15px 1px rgb(99, 97, 97),-10px -10px 15px 1px rgb(99, 97, 97)`;
     }
 
     for (let i = 0; i < n1; i++) {
@@ -175,7 +181,7 @@ function setup()
                     {
                         boxes[i][j]=i*n2+(j+1);
                         // console.log(boxes[i][j]);
-                        str+=`<div style=" position:absolute; top:calc(${i}*${boxareasize}); left:calc(${j}*${boxareasize}); height:${boxsize}; width:${boxsize}; transition: all 0.3s ease 0s; background: url('../img/${i}${j}.jpg') no-repeat center center/cover; font-size:0" class="glass${colorno} derivedbox" >${boxes[i][j]}</div>`;
+                        str+=`<div style=" position:absolute; top:calc(${i}*${boxareasize}); left:calc(${j}*${boxareasize}); height:${boxsize}; width:${boxsize}; transition: all 0.3s ease 0s; background: url('https://raw.githubusercontent.com/deep-sekhar/MxN_Puzzle/main/img/${i}${j}.jpg') no-repeat center center/cover; font-size:0" class="glass${colorno} derivedbox" >${boxes[i][j]}</div>`;
                     }
                 }
                 else
