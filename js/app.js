@@ -152,9 +152,9 @@ function setup()
     }
     
     if (bk==1) {
-        boxareasize = "80px";
-        boxsize = "75px";
-        boxdist = 80;
+        boxareasize = "90px";
+        boxsize = "85px";
+        boxdist = 90;
     }
 
     // box styles 
