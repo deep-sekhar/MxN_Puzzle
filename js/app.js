@@ -152,6 +152,12 @@ function setup()
     boxes = new Array(n1);
     // setting up the boxes  
 
+    if (n1!=3||n2!=3) {
+        tbuttonarea3.style.backgroundColor=`rgb(255, 255, 255)`;
+        tbutton3.style.transform=`translateX(0px)`;
+        bk=0;
+    }
+
     for (let i = 0; i < n1; i++) {
         boxes[i]=new Array(n2);
         for(let j = 0; j< n2; j++)
@@ -160,13 +166,27 @@ function setup()
                 // console.log(i);
                 if (i!=n1-1||j!=n2-1) 
                 {
-                    boxes[i][j]=i*n2+(j+1);
-                    // console.log(boxes[i][j]);
-                    str+=`<div style="display:flex; align-items:center; justify-content:center; position:absolute; top:calc(${i}*${boxareasize}); left:calc(${j}*${boxareasize}); height:${boxsize}; width:${boxsize}; transition: all 0.3s ease 0s" class="glass${colorno} derivedbox" >${boxes[i][j]}</div>`;
+                    if (bk==0) {
+                        boxes[i][j]=i*n2+(j+1);
+                        // console.log(boxes[i][j]);
+                        str+=`<div style="display:flex; align-items:center; justify-content:center; position:absolute; top:calc(${i}*${boxareasize}); left:calc(${j}*${boxareasize}); height:${boxsize}; width:${boxsize}; transition: all 0.3s ease 0s" class="glass${colorno} derivedbox" >${boxes[i][j]}</div>`;
+                    }
+                    else
+                    {
+                        boxes[i][j]=i*n2+(j+1);
+                        // console.log(boxes[i][j]);
+                        str+=`<div style=" position:absolute; top:calc(${i}*${boxareasize}); left:calc(${j}*${boxareasize}); height:${boxsize}; width:${boxsize}; transition: all 0.3s ease 0s; background: url('../img/${i}${j}.jpg') no-repeat center center/cover; font-size:0" class="glass${colorno} derivedbox" >${boxes[i][j]}</div>`;
+                    }
                 }
                 else
                 {
-                    str+=`<div class="glass${colorno} derivedbox" style="display:flex; align-items:center; justify-content:center; position:absolute; top:calc(${i}*${boxareasize}); left:calc(${j}*${boxareasize}); height:${boxsize}; width:${boxsize}; transition: all 0.3s ease 0s; background:white"> </div>`;
+                    if (bk==0) {
+                        str+=`<div class="glass${colorno} derivedbox" style="display:flex; align-items:center; justify-content:center; position:absolute; top:calc(${i}*${boxareasize}); left:calc(${j}*${boxareasize}); height:${boxsize}; width:${boxsize}; transition: all 0.3s ease 0s; background:white"> </div>`;
+                    }
+                    else
+                    {
+                        str+=`<div class="glass${colorno} derivedbox" style="display:flex; align-items:center; justify-content:center; position:absolute; top:calc(${i}*${boxareasize}); left:calc(${j}*${boxareasize}); height:${boxsize}; width:${boxsize}; transition: all 0.3s ease 0s; background:white; font-size:0"> </div>`;
+                    }
                 }
             }
         }
@@ -298,8 +318,16 @@ function swap(x1,y1,x2,y2)
                 derivedbox[y1*n2+i+1].innerText=`${temp1}`;
                 derivedbox[y1*n2+i].style.transform=`translateX(0)`;
                 derivedbox[y1*n2+i+1].style.transform=`translateX(0)`;
-                derivedbox[y1*n2+i+1].style.background="white";
-                derivedbox[y1*n2+i].style.background="";
+                if (bk==0) {
+                    derivedbox[y1*n2+i].style.background="";
+                    derivedbox[y1*n2+i+1].style.background="white";
+                }
+                else
+                {
+                    let prop = window.getComputedStyle(derivedbox[y1*n2+i+1]).getPropertyValue('background');
+                    derivedbox[y1*n2+i].style.background=prop;
+                    derivedbox[y1*n2+i+1].style.background="white";
+                }
                 // derivedbox[y1*n2+i].style.transform=`scale(1)`;
                 // derivedbox[y1*n2+i+1].style.transform=`scale(1)`;
             } 
@@ -320,8 +348,16 @@ function swap(x1,y1,x2,y2)
                 derivedbox[y1*n2+i-1].style.transform=`translateX(0)`;
                 // derivedbox[y1*n2+i].style.transform=`scale(1)`;
                 // derivedbox[y1*n2+i-1].style.transform=`scale(1)`;
-                derivedbox[y1*n2+i-1].style.background="white";
-                derivedbox[y1*n2+i].style.background="";
+                if (bk==0) {
+                    derivedbox[y1*n2+i].style.background="";
+                    derivedbox[y1*n2+i-1].style.background="white";
+                }
+                else
+                {
+                    let prop = window.getComputedStyle(derivedbox[y1*n2+i-1]).getPropertyValue('background');
+                    derivedbox[y1*n2+i].style.background=prop;
+                    derivedbox[y1*n2+i-1].style.background="white";
+                }
             }    
             countmoves=countmoves+(x1-x2);
         }
@@ -344,8 +380,16 @@ function swap(x1,y1,x2,y2)
                 derivedbox[(i+1)*n2+x1].innerText=`${temp1}`;
                 derivedbox[i*n2+x1].style.transform=`translateY(0)`;
                 derivedbox[(i+1)*n2+x1].style.transform=`translateY(0)`;
-                derivedbox[(i+1)*n2+x1].style.background="white";
-                derivedbox[i*n2+x1].style.background="";
+                if (bk==0) {
+                    derivedbox[i*n2+x1].style.background="";
+                    derivedbox[(i+1)*n2+x1].style.background="white";
+                }
+                else
+                {
+                    let prop = window.getComputedStyle(derivedbox[(i+1)*n2+x1]).getPropertyValue('background');
+                    derivedbox[i*n2+x1].style.background=prop;
+                    derivedbox[(i+1)*n2+x1].style.background="white";
+                }
             }
             countmoves=countmoves+(y2-y1);    
         }
@@ -362,8 +406,16 @@ function swap(x1,y1,x2,y2)
                 derivedbox[(i-1)*n2+x1].innerText=`${temp1}`;
                 derivedbox[i*n2+x1].style.transform=`translateY(0)`;
                 derivedbox[(i-1)*n2+x1].style.transform=`translateY(0)`;
-                derivedbox[(i-1)*n2+x1].style.background="white";
-                derivedbox[i*n2+x1].style.background="";
+                if (bk==0) {
+                    derivedbox[i*n2+x1].style.background="";
+                    derivedbox[(i-1)*n2+x1].style.background="white";
+                }
+                else
+                {
+                    let prop = window.getComputedStyle(derivedbox[(i-1)*n2+x1]).getPropertyValue('background');
+                    derivedbox[i*n2+x1].style.background=prop;
+                    derivedbox[(i-1)*n2+x1].style.background="white";
+                }
             }    
             countmoves=countmoves+(y1-y2);
         }
@@ -525,17 +577,26 @@ function imgmodeact() {
 
     if (theCSSprop==`rgb(255, 255, 255)`) {
         // console.log("hi");
-        tbuttonarea3.style.backgroundColor=`rgb(138, 247, 0)`;
-        tbutton3.style.transform=`translateX(26px)`;
-        bk=1;
-        setup();
+        if (n1=3&&n2==3) {
+            alert("Image mode activated. It may take 3-4 secs to load image depending on your connection speed.");
+            tbuttonarea3.style.backgroundColor=`rgb(138, 247, 0)`;
+            tbutton3.style.transform=`translateX(26px)`;
+            bk=1;
+            setup();
+        }
+        else
+        {
+            alert("image version available only for 3x3 Matrix.")
+        }
     }
     else
     {
-        tbuttonarea3.style.backgroundColor=`rgb(255, 255, 255)`;
-        tbutton3.style.transform=`translateX(0px)`;
-        bk=0;
-        setup();
+        if (bk==1) {
+            tbuttonarea3.style.backgroundColor=`rgb(255, 255, 255)`;
+            tbutton3.style.transform=`translateX(0px)`;
+            bk=0;
+            setup();
+        }
     }
 }
 
