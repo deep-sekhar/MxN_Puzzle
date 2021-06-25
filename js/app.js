@@ -150,7 +150,6 @@ function setup()
     }
 
     countmoves = 0;
-    moves.innerText=`${countmoves}`;
 
     let str ="";
     boxes = new Array(n1);
@@ -234,7 +233,9 @@ function setup()
             wonORnot();
             });
     });
-    // boot();
+    countmoves=0;
+    moves.innerText=`${countmoves}`;
+    
 }
 
 
@@ -244,7 +245,7 @@ function wonORnot() {
     {
         // console.log("time to shift");
         swap(posx,posy,curx,cury);
-        countmoves++;
+        // countmoves++;
         moves.innerText=`${countmoves}`;
     }
     get_coordinates();
@@ -318,7 +319,8 @@ function swap(x1,y1,x2,y2)
                 derivedbox[y1*n2+i].style.background="";
                 // derivedbox[y1*n2+i].style.transform=`scale(1)`;
                 // derivedbox[y1*n2+i+1].style.transform=`scale(1)`;
-            }    
+            } 
+            countmoves=countmoves+(x2-x1);   
         }
         else
         {
@@ -338,7 +340,7 @@ function swap(x1,y1,x2,y2)
                 derivedbox[y1*n2+i-1].style.background="white";
                 derivedbox[y1*n2+i].style.background="";
             }    
-
+            countmoves=countmoves+(x1-x2);
         }
     }
     else if (x1==x2) 
@@ -361,7 +363,8 @@ function swap(x1,y1,x2,y2)
                 derivedbox[(i+1)*n2+x1].style.transform=`translateY(0)`;
                 derivedbox[(i+1)*n2+x1].style.background="white";
                 derivedbox[i*n2+x1].style.background="";
-            }    
+            }
+            countmoves=countmoves+(y2-y1);    
         }
         else
         {
@@ -379,7 +382,7 @@ function swap(x1,y1,x2,y2)
                 derivedbox[(i-1)*n2+x1].style.background="white";
                 derivedbox[i*n2+x1].style.background="";
             }    
-
+            countmoves=countmoves+(y1-y2);
         }
     }
     
