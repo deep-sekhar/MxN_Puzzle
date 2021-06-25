@@ -15,6 +15,7 @@ A  MxN Puzzle by a beginner in web develoopment .
 ## Features
 
 - all from Scratch without any frameworks
+- image mode available for 3x3 matrix
 - Light/dark mode toggle
 - Loading and page animations
 - Scores stored in local storage
